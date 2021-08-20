@@ -115,7 +115,7 @@ Resources:
     Type: AWS::AutoScaling::AutoScalingGroup
     Properties:
       VPCZoneIdentifier: #list of subnet IDs for VPC where instances in the AutoSG can be created
-        - Fn::ImportValue: !Sub "${EnvironmentName}-PRIV-NETS"
+        - Fn::ImportValue: !Sub "${EnvironmentName}-PRI-NETS"
       LaunchConfigurationName:
         Ref: WebAppLaunchConfig
       MinSize: "4"
@@ -177,6 +177,6 @@ Resources:
 Outputs:
   WebsiteURL:
     Description: DNS Name of the web application throught the Load Balancer
-    Value: !Sub http://${WebAppLoadBalancer.DNSName}
+    Value: !Sub http://${WebAppLB.DNSName}
     Export:
       Name: !Sub ${EnvironmentName}-DNS-NAME

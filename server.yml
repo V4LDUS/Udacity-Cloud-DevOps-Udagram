@@ -96,7 +96,6 @@ Resources:
           cd /var/www/html
           aws s3 cp s3://udacity-demo-1/udacity.zip .
           unzip -o udacity.zip
-          systemctl restart apache2.service
       ImageId: !Ref InstanceAMI #The AMI of us-east-1
       IamInstanceProfile: !Ref ProfileWithRolesForOurApp
       SecurityGroups:

@@ -89,15 +89,13 @@ Resources:
       UserData:
         Fn::Base64: !Sub |
           #!/bin/bash
-          snap install aws-cli --classic
           apt-get update -y
-          apt-get install unzip apache2 -y
+          apt-get install unzip awscli -y
+          apt-get install apache2 -y
           systemctl start apache2.service
-          systemctl enable apache2.service
           cd /var/www/html
-          rm index.html
-          aws s3 cp s3://${WebAppS3Name}/udagram.zip .
-          unzip -o udagram.zip
+          aws s3 cp s3://udacity-demo-1/udacity.zip .
+          unzip -o udacity.zip
           systemctl restart apache2.service
       ImageId: !Ref InstanceAMI #The AMI of us-east-1
       IamInstanceProfile: !Ref ProfileWithRolesForOurApp
